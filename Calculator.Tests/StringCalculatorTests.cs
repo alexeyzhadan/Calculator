@@ -55,5 +55,18 @@ namespace Calculator.Tests
             // assert
             Assert.Equal(10, result);
         }
+
+        [Fact]
+        public void Add_ThreeNumbersSeparatedByCommaAndNewLine_SumOfNumbersReturned()
+        {
+            // arrange
+            StringCalculator calculator = new StringCalculator();
+
+            // act
+            var result = calculator.Add("1\n2,3");
+
+            // assert
+            Assert.Equal(6, result);
+        }
     }
 }

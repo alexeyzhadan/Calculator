@@ -5,6 +5,7 @@ namespace Calculator
     public class StringCalculator
     {
         private const string COMMA = ",";
+        private const string NEW_LINE = "\n";
 
         public int Add(string numbers)
         {
@@ -16,7 +17,8 @@ namespace Calculator
                 return resultSum;
             }
 
-            arrayOfStringNumbers = numbers.Split(COMMA, StringSplitOptions.RemoveEmptyEntries);
+            arrayOfStringNumbers = numbers.Split(
+                new string[] { COMMA, NEW_LINE }, StringSplitOptions.RemoveEmptyEntries);
 
             foreach(string number in arrayOfStringNumbers)
             {
