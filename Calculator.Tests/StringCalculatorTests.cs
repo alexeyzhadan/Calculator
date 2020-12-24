@@ -68,5 +68,18 @@ namespace Calculator.Tests
             // assert
             Assert.Equal(6, result);
         }
+
+        [Fact]
+        public void Add_TwoNumbersSeparatedByAnyDelimiter_SumOfNumbersReturned()
+        {
+            // arrange
+            StringCalculator calculator = new StringCalculator();
+
+            // act
+            var result = calculator.Add("//;\n1;2");
+
+            // assert
+            Assert.Equal(3, result);
+        }
     }
 }
