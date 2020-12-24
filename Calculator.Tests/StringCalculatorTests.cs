@@ -5,47 +5,55 @@ namespace Calculator.Tests
     public class StringCalculatorTests
     {
         [Fact]
-        public void Add_EmptyString_0Returned()
+        public void Add_EmptyString_ZeroReturned()
         {
             // arrange
             StringCalculator calculator = new StringCalculator();
-            int expected = 0;
 
             // act
             var result = calculator.Add(string.Empty);
 
             // assert
-            Assert.Equal(expected, result);
+            Assert.Equal(0, result);
         }
 
         [Fact]
-        public void Add_StringOf1_1Returned() 
+        public void Add_OneNumber_TheSameNumberReturned()
         {
             // arrange
             StringCalculator calculator = new StringCalculator();
-            string input = "1";
-            int expected = 1;
 
             // act
-            var result = calculator.Add(input);
+            var result = calculator.Add("1");
 
             // assert
-            Assert.Equal(expected, result);
+            Assert.Equal(1, result);
         }
 
         [Fact]
-        public void Add_StringOf1and2_3Returned()
+        public void Add_TwoCommaSeparatedNumbers_SumOfNumbersReturned()
         {
             // arrange
             StringCalculator calculator = new StringCalculator();
-            string input = "1,2";
-            int expected = 3;
 
             // act
-            var result = calculator.Add(input);
+            var result = calculator.Add("1,2");
 
             // assert
-            Assert.Equal(expected, result);
+            Assert.Equal(3, result);
+        }
+
+        [Fact]
+        public void Add_UnknownAmountOfNumbersSeparatedByCommas_SumOfNumbersReturned()
+        {
+            // arrange
+            StringCalculator calculator = new StringCalculator();
+
+            // act
+            var result = calculator.Add("1,1,1,1,1,1,1,1,1,1");
+
+            // assert
+            Assert.Equal(10, result);
         }
     }
 }
