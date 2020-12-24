@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System;
+using Xunit;
 
 namespace Calculator.Tests
 {
@@ -80,6 +81,19 @@ namespace Calculator.Tests
 
             // assert
             Assert.Equal(3, result);
+        }
+
+        [Fact]
+        public void Add_PositiveAndNegativeNumbers_ThrowsException()
+        {
+            // arrange
+            StringCalculator calculator = new StringCalculator();
+
+            // act
+            Action act = () => calculator.Add("1,2,-2,-3");
+
+            // assert
+            Assert.Throws<Exception>(act);
         }
     }
 }
