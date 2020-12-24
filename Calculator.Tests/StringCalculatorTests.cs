@@ -58,7 +58,7 @@ namespace Calculator.Tests
         }
 
         [Fact]
-        public void Add_ThreeNumbersSeparatedByCommaAndNewLine_SumOfNumbersReturned()
+        public void Add_NumbersSeparatedByCommaAndNewLine_ShouldAllowUsingNewLineLikeDelimiter()
         {
             // arrange
             StringCalculator calculator = new StringCalculator();
@@ -71,7 +71,7 @@ namespace Calculator.Tests
         }
 
         [Fact]
-        public void Add_TwoNumbersSeparatedByAnyDelimiter_SumOfNumbersReturned()
+        public void Add_NumbersSeparatedByCustomDelimiter_ShouldAllowUsingAnyDilimiter()
         {
             // arrange
             StringCalculator calculator = new StringCalculator();
@@ -84,7 +84,7 @@ namespace Calculator.Tests
         }
 
         [Fact]
-        public void Add_PositiveAndNegativeNumbers_ThrowsException()
+        public void Add_PositiveAndNegativeNumbers_ShouldThrowExceptionWhenNegative()
         {
             // arrange
             StringCalculator calculator = new StringCalculator();
@@ -93,7 +93,21 @@ namespace Calculator.Tests
             Action act = () => calculator.Add("1,2,-2,-3");
 
             // assert
-            Assert.Throws<Exception>(act);
+            var exception = Assert.Throws<Exception>(act);
+            Assert.Contains("Negatives not allowed!", exception.Message);
+        }
+
+        [Fact]
+        public void Add_SmallAndBigNumbers_ShouldIgnoreNumbersGreaterThan1000()
+        {
+            // arrange
+            StringCalculator calculator = new StringCalculator();
+
+            // act
+            var result = calculator.Add("1001,2");
+
+            // assert
+            Assert.Equal(2, result);
         }
     }
 }

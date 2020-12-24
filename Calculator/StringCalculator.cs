@@ -16,6 +16,7 @@ namespace Calculator
 
         private const int ZERO = 0;
         private const int TWO = 2;
+        private const int THOUSAND = 1000;
 
         public int Add(string numbers)
         {
@@ -24,6 +25,7 @@ namespace Calculator
             string delimiter;
             string[] stringLines;
             List<string> negativeNumbers;
+            int tempNumber;
 
             if (numbers == string.Empty)
             {
@@ -58,7 +60,13 @@ namespace Calculator
 
             foreach(string number in arrayOfStringNumbers)
             {
-                resultSum += int.Parse(number);
+                tempNumber = int.Parse(number);
+                if (tempNumber > THOUSAND)
+                {
+                    continue;
+                }
+
+                resultSum += tempNumber;
             }
 
             return resultSum;
