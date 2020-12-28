@@ -8,7 +8,7 @@ namespace Calculator.Tests
     public class DialogControllerTests
     {
         [Fact]
-        public void GetMessage_SomeMessage_ShouldToGetTheSameMessage()
+        public void GetMessage_SomeMessage_ShouldGetTheSameMessage()
         {
             // arrange
             string excepted = "Test message";
@@ -23,7 +23,23 @@ namespace Calculator.Tests
         }
 
         [Fact]
-        public void SendMessage_SomeMessage_ShouldToCallMethodWriteLineWithTheSameMessageOneTime()
+        public void GetMessage_InvalidMessage_ShouldReturnEmptyString()
+        {
+            // arrange
+            Mock<IConsole> console = new Mock<IConsole>();
+            DialogController dialog = new DialogController(console.Object);
+            IValidator validator = Mock.Of<IValidator>(v =>
+                v.IsValid(It.IsAny<string>()) == false);
+
+            // act
+            string result = dialog.GetMessage(validator);
+
+            // assert
+            Assert.Equal(string.Empty, result);
+        }
+
+        [Fact]
+        public void SendMessage_SomeMessage_ShouldCallMethodWriteLineWithTheSameMessageOneTime()
         {
             // arrange
             string message = "Test message";

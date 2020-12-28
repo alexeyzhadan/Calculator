@@ -10,6 +10,7 @@ namespace Calculator.Controllers
             IConsole console = new ConsoleWrapper();
             StringCalculator calculator = new StringCalculator();
             DialogController dialog = new DialogController(console);
+            IValidator validator = new NumbersSeparatedByCommasValidator();
 
             string stringOfNumbers;
 
@@ -17,7 +18,7 @@ namespace Calculator.Controllers
             {
                 dialog.SendMessage("Enter numbers separated by commas:");
 
-                stringOfNumbers = dialog.GetMessage();
+                stringOfNumbers = dialog.GetMessage(validator);
 
                 if (stringOfNumbers == string.Empty)
                 {

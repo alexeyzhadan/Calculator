@@ -20,5 +20,17 @@ namespace Calculator.Controllers
         {
             return _console.ReadLine();
         }
+
+        public string GetMessage(IValidator validator)
+        {
+            string input = _console.ReadLine();
+
+            if (validator.IsValid(input))
+            {
+                return input;
+            }
+
+            return string.Empty;
+        }
     }
 }
