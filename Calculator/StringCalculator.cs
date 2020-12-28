@@ -8,22 +8,22 @@ namespace Calculator
     {
         private const string COMMA = ",";
         private const string NEW_LINE = "\n";
+        private const string SLASH = "/";
         private const string DOUBLE_SLASH = "//";
         private const string MINUS = "-";
+        private const string START_SQUARE_BRACKET = "[";
+        private const string END_SQUARE_BRACKET = "]";
 
         private const int FIRST_ELEMENT = 0;
         private const int SECOND_ELEMENT = 1;
 
         private const int ZERO = 0;
-        private const int TWO = 2;
         private const int THOUSAND = 1000;
 
         public int Add(string numbers)
         {
             string[] arrayOfStringNumbers;
             int resultSum = ZERO;
-            string delimiter;
-            string[] stringLines;
             List<string> negativeNumbers;
             int tempNumber;
 
@@ -34,12 +34,8 @@ namespace Calculator
 
             if (numbers.StartsWith(DOUBLE_SLASH))
             {
-                stringLines = numbers.Split(NEW_LINE, StringSplitOptions.RemoveEmptyEntries);
-
-                delimiter = stringLines[FIRST_ELEMENT].Substring(TWO);
-
-                arrayOfStringNumbers = stringLines[SECOND_ELEMENT].Split(
-                    delimiter, StringSplitOptions.RemoveEmptyEntries);
+                arrayOfStringNumbers = 
+                    GetNumbersFromStringWithCustomDelimiters(numbers);
             }
             else
             {
@@ -70,6 +66,39 @@ namespace Calculator
             }
 
             return resultSum;
+        }
+
+        private string[] GetNumbersFromStringWithCustomDelimiters(string stringOfNumbers)
+        {
+            string delimiter;
+            string[] stringLines;
+            string[] numbers;
+            string stringOfDelimiter;
+            int startIndex;
+            int endIndex;
+
+            stringLines = stringOfNumbers.Split(NEW_LINE, StringSplitOptions.RemoveEmptyEntries);
+            stringOfDelimiter = stringLines[FIRST_ELEMENT];
+
+            if (stringOfDelimiter.Contains(START_SQUARE_BRACKET) && 
+                stringOfDelimiter.Contains(END_SQUARE_BRACKET))
+            {
+                startIndex = stringOfDelimiter.IndexOf(START_SQUARE_BRACKET) + 1;
+                endIndex = stringOfDelimiter.IndexOf(END_SQUARE_BRACKET);
+
+                delimiter = stringOfDelimiter.Substring(startIndex, endIndex - startIndex);
+            }
+            else
+            {
+                startIndex = stringOfDelimiter.LastIndexOf(SLASH) + 1;
+
+                delimiter = stringOfDelimiter.Substring(startIndex);
+            }
+
+            numbers = stringLines[SECOND_ELEMENT].Split(
+                delimiter, StringSplitOptions.RemoveEmptyEntries);
+
+            return numbers;
         }
     }
 }

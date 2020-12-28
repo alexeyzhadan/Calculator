@@ -6,7 +6,7 @@ namespace Calculator.Tests
     public class StringCalculatorTests
     {
         [Fact]
-        public void Add_EmptyString_ZeroReturned()
+        public void Add_EmptyString_ShouldReturnZero()
         {
             // arrange
             StringCalculator calculator = new StringCalculator();
@@ -19,7 +19,7 @@ namespace Calculator.Tests
         }
 
         [Fact]
-        public void Add_OneNumber_TheSameNumberReturned()
+        public void Add_OneNumber_ShouldReturnTheSameNumber()
         {
             // arrange
             StringCalculator calculator = new StringCalculator();
@@ -32,7 +32,7 @@ namespace Calculator.Tests
         }
 
         [Fact]
-        public void Add_TwoCommaSeparatedNumbers_SumOfNumbersReturned()
+        public void Add_TwoCommaSeparatedNumbers_ShouldReturnSumOfNumbers()
         {
             // arrange
             StringCalculator calculator = new StringCalculator();
@@ -45,7 +45,7 @@ namespace Calculator.Tests
         }
 
         [Fact]
-        public void Add_UnknownAmountOfNumbersSeparatedByCommas_SumOfNumbersReturned()
+        public void Add_UnknownAmountOfNumbers_ShouldReturnSumOfNumbers()
         {
             // arrange
             StringCalculator calculator = new StringCalculator();
@@ -58,7 +58,7 @@ namespace Calculator.Tests
         }
 
         [Fact]
-        public void Add_NumbersSeparatedByCommaAndNewLine_ShouldAllowUsingNewLineLikeDelimiter()
+        public void Add_NumbersSeparatedByCommaAndNewLine_ShouldAllowUsingNewLineAsDelimiter()
         {
             // arrange
             StringCalculator calculator = new StringCalculator();
@@ -71,7 +71,7 @@ namespace Calculator.Tests
         }
 
         [Fact]
-        public void Add_NumbersSeparatedByCustomDelimiter_ShouldAllowUsingAnyDilimiter()
+        public void Add_NumbersSeparatedBySingleCustomDelimiter_ShouldAllowUsingAnyDilimiter()
         {
             // arrange
             StringCalculator calculator = new StringCalculator();
@@ -108,6 +108,19 @@ namespace Calculator.Tests
 
             // assert
             Assert.Equal(2, result);
+        }
+
+        [Fact]
+        public void Add_NumbersSeparatedByMultipleCustomDelimiter_ShouldAllowUsingAnyDelimiters()
+        {
+            // arrange
+            StringCalculator calculator = new StringCalculator();
+
+            // act
+            var result = calculator.Add("//[***]\n1***2***3");
+
+            // assert
+            Assert.Equal(6, result);
         }
     }
 }
