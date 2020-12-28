@@ -111,7 +111,7 @@ namespace Calculator.Tests
         }
 
         [Fact]
-        public void Add_NumbersSeparatedByMultipleCustomDelimiter_ShouldAllowUsingAnyDelimiters()
+        public void Add_NumbersSeparatedByDelimiterWithLengthGreaterThanOne_ShouldAllowUsingDelimiterWithAnyLength()
         {
             // arrange
             StringCalculator calculator = new StringCalculator();
@@ -121,6 +121,32 @@ namespace Calculator.Tests
 
             // assert
             Assert.Equal(6, result);
+        }
+
+        [Fact]
+        public void Add_NumbersSeparatedByMultipleDelimiters_ShouldAllowUsingAnyCountOfDelimiters()
+        {
+            // arrange
+            StringCalculator calculator = new StringCalculator();
+
+            // act
+            var result = calculator.Add("//[*][%]\n1*2%3");
+
+            // assert
+            Assert.Equal(6, result);
+        }
+
+        [Fact]
+        public void Add_NumbersSeparatedByMultipleDelimitersWithAnyLength_ShouldAllowToSupportAnyDelimiters()
+        {
+            // arrange
+            StringCalculator calculator = new StringCalculator();
+
+            // act
+            var result = calculator.Add("//[*][%][***]\n1***2***1*2%3");
+
+            // assert
+            Assert.Equal(9, result);
         }
     }
 }

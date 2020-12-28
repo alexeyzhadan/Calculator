@@ -8,7 +8,6 @@ namespace Calculator
     {
         private const string COMMA = ",";
         private const string NEW_LINE = "\n";
-        private const string SLASH = "/";
         private const string DOUBLE_SLASH = "//";
         private const string MINUS = "-";
         private const string START_SQUARE_BRACKET = "[";
@@ -18,6 +17,7 @@ namespace Calculator
         private const int SECOND_ELEMENT = 1;
 
         private const int ZERO = 0;
+        private const int TWO = 2;
         private const int THOUSAND = 1000;
 
         public int Add(string numbers)
@@ -70,33 +70,22 @@ namespace Calculator
 
         private string[] GetNumbersFromStringWithCustomDelimiters(string stringOfNumbers)
         {
-            string delimiter;
             string[] stringLines;
             string[] numbers;
-            string stringOfDelimiter;
-            int startIndex;
-            int endIndex;
+            string[] delimiters;
 
             stringLines = stringOfNumbers.Split(NEW_LINE, StringSplitOptions.RemoveEmptyEntries);
-            stringOfDelimiter = stringLines[FIRST_ELEMENT];
 
-            if (stringOfDelimiter.Contains(START_SQUARE_BRACKET) && 
-                stringOfDelimiter.Contains(END_SQUARE_BRACKET))
+            delimiters = stringLines[FIRST_ELEMENT].Split(
+                new string[] { START_SQUARE_BRACKET, END_SQUARE_BRACKET }, StringSplitOptions.RemoveEmptyEntries);
+
+            if (delimiters.Length == 1)
             {
-                startIndex = stringOfDelimiter.IndexOf(START_SQUARE_BRACKET) + 1;
-                endIndex = stringOfDelimiter.IndexOf(END_SQUARE_BRACKET);
-
-                delimiter = stringOfDelimiter.Substring(startIndex, endIndex - startIndex);
-            }
-            else
-            {
-                startIndex = stringOfDelimiter.LastIndexOf(SLASH) + 1;
-
-                delimiter = stringOfDelimiter.Substring(startIndex);
+                delimiters[FIRST_ELEMENT] = stringLines[FIRST_ELEMENT].Substring(TWO);
             }
 
             numbers = stringLines[SECOND_ELEMENT].Split(
-                delimiter, StringSplitOptions.RemoveEmptyEntries);
+                delimiters, StringSplitOptions.RemoveEmptyEntries);
 
             return numbers;
         }
