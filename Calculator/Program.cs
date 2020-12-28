@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Calculator.Controllers;
 
 namespace Calculator
 {
@@ -6,7 +6,7 @@ namespace Calculator
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            new MainController().Run();
         }
     }
 }
