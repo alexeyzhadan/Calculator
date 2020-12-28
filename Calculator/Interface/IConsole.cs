@@ -1,4 +1,4 @@
-﻿namespace Calculator.Services.Interfaces
+﻿namespace Calculator.Interfaces
 {
     public interface IConsole
     {

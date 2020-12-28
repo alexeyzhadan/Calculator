@@ -1,12 +1,13 @@
-﻿using Calculator.Controllers;
-
-namespace Calculator
+﻿namespace Calculator
 {
     class Program
     {
         static void Main(string[] args)
         {
-            new MainController().Run();
+            var calculator = new ConsoleStringCalculator(
+                    new ConsoleWrapper(), new StringCalculator());
+
+            calculator.Run();
         }
     }
 }

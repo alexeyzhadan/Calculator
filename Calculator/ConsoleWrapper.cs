@@ -1,7 +1,7 @@
-﻿using Calculator.Services.Interfaces;
+﻿using Calculator.Interfaces;
 using System;
 
-namespace Calculator.Services
+namespace Calculator
 {
     public class ConsoleWrapper : IConsole
     {
