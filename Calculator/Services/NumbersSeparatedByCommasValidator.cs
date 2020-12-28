@@ -7,7 +7,7 @@ namespace Calculator.Services
     {
         public bool IsValid(string input)
         {
-            string pattern = @"^([0-9]+,)*[0-9]$";
+            string pattern = @"^([0-9]+,)*[0-9]+$";
             Match match = Regex.Match(input, pattern);
 
             if (match.Success)

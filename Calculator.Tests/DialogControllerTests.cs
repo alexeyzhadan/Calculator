@@ -39,6 +39,25 @@ namespace Calculator.Tests
         }
 
         [Fact]
+        public void GetMessage_ValidMessage_ShouldReturnTheSameMessage()
+        {
+            // arrange
+            string input = "1,2,3,4";
+            Mock<IConsole> console = new Mock<IConsole>();
+            DialogController dialog = new DialogController(console.Object);
+            Mock<IValidator> validator = new Mock<IValidator>();
+
+            console.Setup(c => c.ReadLine()).Returns(input);
+            validator.Setup(v => v.IsValid(input)).Returns(true);
+
+            // act
+            string result = dialog.GetMessage(validator.Object);
+
+            // assert
+            Assert.Equal(input, result);
+        }
+
+        [Fact]
         public void SendMessage_SomeMessage_ShouldCallMethodWriteLineWithTheSameMessageOneTime()
         {
             // arrange

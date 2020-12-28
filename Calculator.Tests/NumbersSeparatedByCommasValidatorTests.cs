@@ -38,7 +38,7 @@ namespace Calculator.Tests
             var validator = new NumbersSeparatedByCommasValidator();
 
             // act
-            var result = validator.IsValid("1,2");
+            var result = validator.IsValid("1,20");
 
             // assert
             Assert.True(result);
