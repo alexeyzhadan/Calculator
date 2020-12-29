@@ -38,7 +38,7 @@ namespace Calculator.Tests
         }
 
         [Fact]
-        public void Run_InConsoleEnteredEmptyString_ShouldExitFromTheMethod()
+        public void Run_InConsoleEnteredEmptyString_ShouldStopAskingForNumbers()
         {
             // arrange
             consoleMock.Setup(c => c.ReadLine()).Returns(string.Empty);
@@ -51,7 +51,7 @@ namespace Calculator.Tests
         }
 
         [Fact]
-        public void Run_ValueWasCalculatedFirstTime_TheIntroMessageShouldChange()
+        public void Run_ValueWasCalculatedFirstTime_IntroMessageShouldChange()
         {
             // arrange
             var calledIntroMessages = new List<string>();
@@ -88,5 +88,18 @@ namespace Calculator.Tests
             // assert
             Assert.All(calledResultMessage, m => m.Contains("3"));
         }
+
+        [Fact]
+        public void Run_CountOfIterationIsNegative_ShouldExitFromMethod()
+        {
+            // arrange
+
+            // act
+            consoleCalculator.Run(-10);
+
+            // assert
+            consoleMock.Verify(c => c.WriteLine(It.IsAny<string>()), Times.Never);
+        }
+
     }
 }
