@@ -13,16 +13,15 @@ namespace Calculator
             _calculator = calculator;
         }
 
-        public void Run(int countOfIteration = int.MaxValue)
+        public void Run()
         {
             string stringOfNumbers;
-            string introMessage = "Enter numbers separated by commas:";
-            bool introMessageWasChanged = false;
+            int sumOfNumbers;
 
-            for(int i = 0; i < countOfIteration; i++)
+            _console.WriteLine("Enter numbers separated by commas:");
+
+            while(true)
             {
-                _console.WriteLine(introMessage);
-
                 stringOfNumbers = _console.ReadLine();
 
                 if (stringOfNumbers == string.Empty)
@@ -30,13 +29,9 @@ namespace Calculator
                     break;
                 }
 
-                _console.WriteLine($"Sum of numbers equals {_calculator.Add(stringOfNumbers)}\n");
+                sumOfNumbers = _calculator.Add(stringOfNumbers);
 
-                if (!introMessageWasChanged)
-                {
-                    introMessage = "Repeat or press Enter for exit:";
-                    introMessageWasChanged = true;
-                }
+                _console.WriteLine($"Sum of numbers equals {sumOfNumbers}\n\nRepeat or press Enter for exit:");
             }
         }
     }
