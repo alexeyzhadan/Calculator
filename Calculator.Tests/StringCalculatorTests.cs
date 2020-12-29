@@ -5,11 +5,17 @@ namespace Calculator.Tests
 {
     public class StringCalculatorTests
     {
+        StringCalculator calculator;
+
+        public StringCalculatorTests()
+        {
+            calculator = new StringCalculator();
+        }
+
         [Fact]
         public void Add_EmptyString_ShouldReturnZero()
         {
             // arrange
-            StringCalculator calculator = new StringCalculator();
 
             // act
             var result = calculator.Add(string.Empty);
@@ -22,7 +28,6 @@ namespace Calculator.Tests
         public void Add_OneNumber_ShouldReturnTheSameNumber()
         {
             // arrange
-            StringCalculator calculator = new StringCalculator();
 
             // act
             var result = calculator.Add("1");
@@ -35,7 +40,6 @@ namespace Calculator.Tests
         public void Add_TwoCommaSeparatedNumbers_ShouldReturnSumOfNumbers()
         {
             // arrange
-            StringCalculator calculator = new StringCalculator();
 
             // act
             var result = calculator.Add("1,2");
@@ -48,7 +52,6 @@ namespace Calculator.Tests
         public void Add_UnknownAmountOfNumbers_ShouldReturnSumOfNumbers()
         {
             // arrange
-            StringCalculator calculator = new StringCalculator();
 
             // act
             var result = calculator.Add("1,1,1,1,1,1,1,1,1,1");
@@ -61,7 +64,6 @@ namespace Calculator.Tests
         public void Add_NumbersSeparatedByCommaAndNewLine_ShouldAllowUsingNewLineAsDelimiter()
         {
             // arrange
-            StringCalculator calculator = new StringCalculator();
 
             // act
             var result = calculator.Add("1\n2,3");
@@ -74,7 +76,6 @@ namespace Calculator.Tests
         public void Add_NumbersSeparatedBySingleCustomDelimiter_ShouldAllowUsingAnyDilimiter()
         {
             // arrange
-            StringCalculator calculator = new StringCalculator();
 
             // act
             var result = calculator.Add("//;\n1;2");
@@ -87,7 +88,6 @@ namespace Calculator.Tests
         public void Add_PositiveAndNegativeNumbers_ShouldThrowExceptionWhenNegative()
         {
             // arrange
-            StringCalculator calculator = new StringCalculator();
 
             // act
             Action act = () => calculator.Add("1,2,-2,-3");
@@ -101,7 +101,6 @@ namespace Calculator.Tests
         public void Add_SmallAndBigNumbers_ShouldIgnoreNumbersGreaterThan1000()
         {
             // arrange
-            StringCalculator calculator = new StringCalculator();
 
             // act
             var result = calculator.Add("1001,2");
@@ -114,7 +113,6 @@ namespace Calculator.Tests
         public void Add_NumbersSeparatedByDelimiterWithLengthGreaterThanOne_ShouldAllowUsingDelimiterWithAnyLength()
         {
             // arrange
-            StringCalculator calculator = new StringCalculator();
 
             // act
             var result = calculator.Add("//[***]\n1***2***3");
@@ -127,7 +125,6 @@ namespace Calculator.Tests
         public void Add_NumbersSeparatedByMultipleDelimiters_ShouldAllowUsingAnyCountOfDelimiters()
         {
             // arrange
-            StringCalculator calculator = new StringCalculator();
 
             // act
             var result = calculator.Add("//[*][%]\n1*2%3");
@@ -140,7 +137,6 @@ namespace Calculator.Tests
         public void Add_NumbersSeparatedByMultipleDelimitersWithAnyLength_ShouldAllowToSupportAnyDelimiters()
         {
             // arrange
-            StringCalculator calculator = new StringCalculator();
 
             // act
             var result = calculator.Add("//[*][%][***]\n1***2***1*2%3");

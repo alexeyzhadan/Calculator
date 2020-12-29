@@ -7,14 +7,22 @@ namespace Calculator.Tests
 {
     public class ConsoleStringCalculatorTests
     {
+        Mock<IConsole> consoleMock;
+        StringCalculator stringCalculator;
+        ConsoleStringCalculator consoleCalculator;
+
+        public ConsoleStringCalculatorTests()
+        {
+            consoleMock = new Mock<IConsole>();
+            stringCalculator = new StringCalculator();
+            consoleCalculator = new ConsoleStringCalculator(consoleMock.Object, stringCalculator);
+        }
+
         [Fact]
-        void Run_CountOfIterationEqualsTen_CountOfCalculatingShouldNotBeMoreThanTen()
+        public void Run_CountOfIterationEqualsTen_CountOfCalculatingShouldNotBeMoreThanTen()
         {
             // arrange
             int countOfIteration = 10;
-            var consoleMock = new Mock<IConsole>();
-            var stringCalculator = new StringCalculator();
-            var consoleCalculator = new ConsoleStringCalculator(consoleMock.Object, stringCalculator);
             var countOfCalledReadLineMethod = 0;
 
             consoleMock
@@ -30,13 +38,9 @@ namespace Calculator.Tests
         }
 
         [Fact]
-        void Run_InConsoleEnteredEmptyString_ShouldExitFromTheMethod()
+        public void Run_InConsoleEnteredEmptyString_ShouldExitFromTheMethod()
         {
             // arrange
-            var consoleMock = new Mock<IConsole>();
-            var stringCalculator = new StringCalculator();
-            var consoleCalculator = new ConsoleStringCalculator(consoleMock.Object, stringCalculator);
-
             consoleMock.Setup(c => c.ReadLine()).Returns(string.Empty);
 
             // act
@@ -47,13 +51,10 @@ namespace Calculator.Tests
         }
 
         [Fact]
-        void Run_ValueWasCalculatedFirstTime_TheIntroMessageShouldChange()
+        public void Run_ValueWasCalculatedFirstTime_TheIntroMessageShouldChange()
         {
             // arrange
             int countOfIteration = 2;
-            var consoleMock = new Mock<IConsole>();
-            var stringCalculator = new StringCalculator();
-            var consoleCalculator = new ConsoleStringCalculator(consoleMock.Object, stringCalculator);
             var calledIntroMessages = new List<string>();
 
             consoleMock
@@ -70,13 +71,10 @@ namespace Calculator.Tests
         }
 
         [Fact]
-        void Run_InConsoleEnteredStringOfNumbers_ShouldDisplayCorrectlySumOnConsole()
+        public void Run_InConsoleEnteredStringOfNumbers_ShouldDisplayCorrectlySumOnConsole()
         {
             // arrange
             int countOfIteration = 10;
-            var consoleMock = new Mock<IConsole>();
-            var stringCalculator = new StringCalculator();
-            var consoleCalculator = new ConsoleStringCalculator(consoleMock.Object, stringCalculator);
             var calledResultMessage = new List<string>();
 
             consoleMock
