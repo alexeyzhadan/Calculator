@@ -44,7 +44,7 @@ namespace Calculator.Tests
             consoleMock.Setup(c => c.ReadLine()).Returns(string.Empty);
 
             // act
-            consoleCalculator.Run();
+            consoleCalculator.Run(10);
 
             // assert
             consoleMock.Verify(c => c.ReadLine(), Times.Once);
@@ -54,7 +54,6 @@ namespace Calculator.Tests
         public void Run_ValueWasCalculatedFirstTime_TheIntroMessageShouldChange()
         {
             // arrange
-            int countOfIteration = 2;
             var calledIntroMessages = new List<string>();
 
             consoleMock
@@ -64,7 +63,7 @@ namespace Calculator.Tests
             consoleMock.Setup(c => c.ReadLine()).Returns("1,2");
 
             // act
-            consoleCalculator.Run(countOfIteration);
+            consoleCalculator.Run(2);
 
             // assert
             Assert.Contains(calledIntroMessages, m => m.StartsWith("Repeat"));
@@ -74,7 +73,6 @@ namespace Calculator.Tests
         public void Run_InConsoleEnteredStringOfNumbers_ShouldDisplayCorrectlySumOnConsole()
         {
             // arrange
-            int countOfIteration = 10;
             var calledResultMessage = new List<string>();
 
             consoleMock
@@ -85,7 +83,7 @@ namespace Calculator.Tests
             consoleMock.Setup(c => c.ReadLine()).Returns("1,2");
 
             // act
-            consoleCalculator.Run(countOfIteration);
+            consoleCalculator.Run(10);
 
             // assert
             Assert.All(calledResultMessage, m => m.Contains("3"));
