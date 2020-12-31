@@ -31,7 +31,8 @@ namespace Calculator
 
                 sumOfNumbers = _calculator.Add(stringOfNumbers);
 
-                _console.WriteLine($"Sum of numbers equals {sumOfNumbers}\n\nRepeat or press Enter for exit:");
+                _console.WriteLine($"Sum of numbers equals {sumOfNumbers}");
+                _console.WriteLine("Repeat or press Enter for exit:");
             }
         }
     }
